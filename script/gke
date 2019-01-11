@@ -20,13 +20,13 @@ echo "creating cluster"
 
 ansible-playbook create-gke-cluster.yml -vv
 
-mkdir $path/openebs/e2e-gke/.kube
-cat ~/.kube/config > $path/openebs/e2e-gke/.kube/config
-cat ~/.kube/config > $path/openebs/e2e-gke/.kube/admin.conf
-cat ~/logs/clusters > $path/openebs/e2e-gke/.kube/clusters
-cat ~/logs/zone > $path/openebs/e2e-gke/.kube/zone
+mkdir $path/.kube
+cat ~/.kube/config > $path/.kube/config
+cat ~/.kube/config > $path/.kube/admin.conf
+cat ~/logs/clusters > $path/.kube/clusters
+cat ~/logs/zone > $path/.kube/zone
 
 kubectl get nodes
 wget https://raw.githubusercontent.com/openebs/litmus/master/hack/rbac.yaml
 kubectl apply -f rbac.yaml
-kubectl create configmap kubeconfig --from-file=$path/openebs/e2e-gke/.kube/admin.conf -n litmus
+kubectl create configmap kubeconfig --from-file=$path/.kube/admin.conf -n litmus
